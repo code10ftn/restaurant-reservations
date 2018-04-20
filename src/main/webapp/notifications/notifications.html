@@ -1,0 +1,10 @@
+<div class="main-content">
+    <div ng-if="USER != null && USER.role != 'ADMIN' && USER.role != 'MANAGER'">
+        <h4 class="form-auth-heading">Notifications</h4>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="notification in notifications | orderBy:'date':true">
+                {{notification.date | date : 'dd.MM.yyyy. HH:mm'}} - {{notification.message}}
+            </li>
+        </ul>
+    </div>
+</div>

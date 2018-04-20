@@ -1,0 +1,27 @@
+<div class="main-content content-medium">
+    <h2 class="form-auth-heading">All offers</h2>
+    <ul class="list-group list-pointer">
+        <li class="list-group-item" ng-repeat="offer in offers" ng-click="openOffer(offer)">
+            <div class="row">
+                <div class="col-xs-6">
+                    {{offer.startDate | date:'yyyy-MM-dd'}}
+                </div>
+                <div class="col-xs-6">
+                    {{offer.endDate | date:'yyyy-MM-dd'}}
+                </div>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="item in offer.offerItems">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            {{item.name}}
+                        </div>
+                        <div class="col-xs-4">
+                            {{item.amount}}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

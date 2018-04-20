@@ -1,0 +1,20 @@
+<form name="newBidForm" class="main-content content-medium">
+    <h2 class="form-auth-heading">Edit bid</h2>
+    <p class="lead">Status: {{bid.status}}</p>
+    <label>Price</label>
+    <input type="number" ng-disabled="disabled" step="any" class="form-control" ng-change="change()" required
+           ng-model="bid.price">
+
+    <label>Date of delivery</label>
+    <input type="date" ng-disabled="disabled" class="form-control" required ng-change="change()"
+           ng-model="bid.dateOfDelivery">
+
+    <label>Warranty</label>
+    <input type="text" ng-disabled="disabled" class="form-control" ng-change="change()" required
+           ng-model="bid.warranty">
+
+    <button ng-disabled="newBidForm.$invalid || notChanged" class="btn btn-lg btn-primary btn-block"
+            ng-click="update()">
+        Save
+    </button>
+</form>

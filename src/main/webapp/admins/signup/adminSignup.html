@@ -1,0 +1,16 @@
+<form name="signUpForm" class="main-content content-small">
+    <h2 class="form-auth-heading">Add system manager</h2>
+
+    <label>Email</label>
+    <input type="email" class="form-control" required autofocus ng-model="admin.email">
+
+    <label>Password</label>
+    <input type="password" class="form-control" required ng-model="admin.password">
+
+    <label>Confirm password</label>
+    <input type="password" class="form-control" required ng-model="admin.passwordConfirmation">
+
+    <button ng-disabled="signUpForm.$invalid" class="btn btn-lg btn-primary btn-block" ng-click="signup()">
+        Sign up
+    </button>
+</form>

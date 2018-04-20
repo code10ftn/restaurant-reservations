@@ -1,0 +1,36 @@
+<div class="main-content content-large row">
+    <div class="col-md-4">
+        <h2 class="form-auth-heading">Friends</h2>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="user in friends | orderBy:['firstName', 'lastName']">
+                {{user.firstName}} {{user.lastName}}
+                <i class="inline-right glyphicon glyphicon-trash" ng-click="removeFriend(user, $index)"></i>
+            </li>
+            <li class="list-group-item" ng-repeat="user in pendings | orderBy:['firstName', 'lastName']">
+                {{user.firstName}} {{user.lastName}} (Pending)
+                <i class="inline-right glyphicon glyphicon-trash" ng-click="cancelPending(user, $index)"></i>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-md-4">
+        <h2 class="form-auth-heading">Requests</h2>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="user in requests | orderBy:['firstName', 'lastName']">
+                {{user.firstName}} {{user.lastName}}
+                <i class="inline-right glyphicon glyphicon-ok" ng-click="acceptRequest(user, $index)"></i>
+                <i class="inline-right glyphicon glyphicon-remove" ng-click="declineRequest(user, $index)"></i>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-md-4">
+        <h2 class="form-auth-heading">Add</h2>
+        <input type="text" class="form-control" placeholder="Search..." autofocus ng-model="searchText">
+        <table ng-show="searchText.length > 0" id="searchTextResults">
+            <tr ng-repeat="user in nonFriends | filter:searchText | orderBy:['firstName', 'lastName']">
+                <td ng-click="addFriend(user)"><b>{{user.firstName}} {{user.lastName}}</b></td>
+            </tr>
+        </table>
+    </div>
+</div>

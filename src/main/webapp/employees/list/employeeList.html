@@ -1,0 +1,16 @@
+<div class="main-content content-medium">
+    <h2 class="form-auth-heading">All restaurant employees</h2>
+
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="employee in employees">
+            <div class="row">
+                <div class="col-md-8">
+                    {{employee.firstName}} {{employee.lastName}}
+                </div>
+                <div class="col-md-4">
+                    {{employee.role}}
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

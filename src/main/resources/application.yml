@@ -1,0 +1,24 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/isa_mrs_tim2
+        driverClassName: org.postgresql.Driver
+        username: postgres
+        password: root
+        platform: postgres
+    jpa:
+        database: POSTGRESQL
+        show_sql: true
+        hibernate:
+            ddl-auto: create
+            naming:
+                strategy: org.hibernate.cfg.ImprovedNamingStrategy
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: hidden # Hidden in public repository.
+        password: hidden # Hidden in public repository.
+        properties:
+            mail:
+                smtp:
+                    starttls.enable: true

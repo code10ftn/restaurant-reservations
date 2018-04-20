@@ -1,0 +1,23 @@
+<form name="signUpForm" class="main-content content-small">
+    <h2 class="form-auth-heading">Sign up</h2>
+
+    <label>First name</label>
+    <input type="text" class="form-control" required autofocus ng-model="user.firstName">
+
+    <label>Last name</label>
+    <input type="text" class="form-control" required ng-model="user.lastName">
+
+    <label>Email</label>
+    <input type="email" class="form-control" required ng-model="user.email">
+
+    <label>Password</label>
+    <input type="password" class="form-control" required ng-model="user.password">
+
+    <label>Confirm password</label>
+    <input type="password" class="form-control" required
+           ng-model="user.passwordConfirmation">
+
+    <button ng-disabled="signUpForm.$invalid" class="btn btn-lg btn-primary btn-block" ng-click="signup()">
+        Sign up
+    </button>
+</form>

@@ -1,0 +1,31 @@
+<div class="main-content content-small">
+    <form name="signUpForm">
+        <h2 class="form-auth-heading">Add restaurant manager</h2>
+
+        <label>First name</label>
+        <input type="text" class="form-control" required autofocus
+               ng-model="manager.firstName">
+        <label>Last name</label>
+        <input type="text" class="form-control" required ng-model="manager.lastName">
+
+        <label>Email</label>
+        <input type="email" class="form-control" required ng-model="manager.email">
+
+        <label>Password</label>
+        <input type="password" class="form-control" required ng-model="manager.password">
+
+        <label>Confirm password</label>
+        <input type="password" class="form-control" required ng-model="manager.passwordConfirmation">
+
+        <label>Restaurant</label>
+        <select id="restaurantSelect" class="form-control" style="margin-bottom: 5px;" required
+                ng-model="manager.restaurantId">
+            <option selected value="">Select...</option>
+            <option ng-repeat="restaurant in restaurants" value="{{restaurant.id}}">{{restaurant.name}}</option>
+        </select>
+
+        <button ng-disabled="signUpForm.$invalid" class="btn btn-lg btn-primary btn-block" ng-click="signup()">
+            Sign up
+        </button>
+    </form>
+</div>

@@ -1,0 +1,9 @@
+<div class="main-content content-medium">
+    <h2 class="form-auth-heading">All system managers</h2>
+
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="manager in managers">
+            {{manager.firstName}} {{manager.lastName}} ({{manager.email}}) at {{manager.restaurant.name}}
+        </li>
+    </ul>
+</div>

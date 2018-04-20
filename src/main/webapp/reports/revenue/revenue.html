@@ -1,0 +1,35 @@
+<div class="main-content content-large">
+    <div class="row">
+        <form name="restaurantRevenueForm" class="col-md-6">
+            <h2 class="form-auth-heading">Revenue period</h2>
+            <label>Start date</label>
+            <input type="date" class="form-control" required ng-model="period.startDate">
+
+            <label>End date</label>
+            <input type="date" class="form-control" required ng-model="period.endDate">
+
+
+            <button ng-disabled="restaurantRevenueForm.$invalid" class="btn btn-lg btn-primary btn-block"
+                    ng-click="getRevenue()">
+                Show revenue
+            </button>
+        </form>
+        <p class="col-md-6"> Restaurant revenue: ${{restaurantRevenue}}</p>
+    </div>
+    <h2 class="form-auth-heading">Waiters revenue</h2>
+    <div class="row">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="revenue in waitersRevenue">
+                <div class="row">
+                    <div class="col-md-6">
+                        <b>{{revenue.waiter.firstName}} {{revenue.waiter.lastName}}</b>
+                    </div>
+                    <div class="col-md-6">
+                        <b>Revenue: ${{revenue.revenue}}</b>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</div>

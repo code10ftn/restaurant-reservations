@@ -1,0 +1,167 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">RestaurantReservations</div>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+
+            <ul ng-if="USER != null && USER.role == 'ADMIN'" class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">System managers<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="admins">All</a></li>
+                        <li><a ui-sref="adminSignup">Add</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Restaurant managers<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="managers">All</a></li>
+                        <li><a ui-sref="managerSignup">Add</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Restaurants<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="restaurants">All</a></li>
+                        <li><a ui-sref="newRestaurant">Add</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul ng-if="USER != null && USER.role == 'MANAGER'" class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Employees<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="employees">All</a></li>
+                        <li><a ui-sref="employeeSignup">Add</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Restaurant<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="restaurantDetails">Edit</a></li>
+                        <li><a ui-sref="worksheet">Worksheet</a></li>
+                        <li><a ui-sref="restaurantSeating">Seating</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Suppliers<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="suppliers">List</a></li>
+                        <li><a ui-sref="supplierSignup">Add</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Offers<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="offers">All</a></li>
+                        <li><a ui-sref="newOffer">Add</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Reports<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="revenue">Revenue</a></li>
+                        <li><a ui-sref="visits">Visits</a></li>
+                        <li><a ui-sref="ratings">Ratings</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul ng-if="USER != null && USER.role == 'WAITER'"
+                class="nav navbar-nav">
+                <li>
+                    <a ui-sref="employeeDetails">Profile</a>
+                </li>
+                <li>
+                    <a ui-sref="employeeWorksheet">Worksheet</a>
+                </li>
+                <li>
+                    <a ui-sref="myOrders">Orders</a>
+                </li>
+            </ul>
+
+            <ul ng-if="USER != null && USER.role == 'CHEF'"
+                class="nav navbar-nav">
+                <li>
+                    <a ui-sref="employeeDetails">Profile</a>
+                </li>
+                <li>
+                    <a ui-sref="employeeWorksheet">Worksheet</a>
+                </li>
+                <li>
+                    <a ui-sref="chefOrders">Orders</a>
+                </li>
+            </ul>
+
+            <ul ng-if="USER != null && USER.role == 'BARTENDER'"
+                class="nav navbar-nav">
+                <li>
+                    <a ui-sref="employeeDetails">Profile</a>
+                </li>
+                <li>
+                    <a ui-sref="employeeWorksheet">Worksheet</a>
+                </li>
+                <li>
+                    <a ui-sref="bartenderOrders">Orders</a>
+                </li>
+            </ul>
+
+            <ul ng-if="USER != null && USER.role == 'GUEST'" class="nav navbar-nav">
+                <li>
+                    <a ui-sref="browseRestaurants">Restaurants</a>
+                </li>
+                <li>
+                    <a ui-sref="reservations">Reservations</a>
+                </li>
+                <li>
+                    <a ui-sref="friends">Friends</a>
+                </li>
+                <li>
+                    <a ui-sref="guestDetails">Profile</a>
+                </li>
+            </ul>
+
+            <ul ng-if="USER != null && USER.role == 'SUPPLIER'" class="nav navbar-nav">
+                <li>
+                    <a ui-sref="supplierDetails">Profile</a>
+                </li>
+                <li>
+                    <a ui-sref="myBids">My bids</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Offers<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="offers">All</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-if="USER == null"><a ui-sref="signup">Sign up</a></li>
+                <li ng-if="USER == null"><a ui-sref="signin">Sign in</a></li>
+                <li ng-if="USER != null"><a ui-sref="signout">Sign out</a></li>
+            </ul>
+
+        </div>
+    </div>
+</nav>

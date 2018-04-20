@@ -1,0 +1,91 @@
+<div class="main-content content-large">
+    <div class="row">
+        <div class="container col-md-5">
+            <h2 class="text-center">My Orders</h2>
+            <button class="btn btn-lg btn-primary btn-block" ng-click="addOrder()">
+                Add
+            </button>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="order in myOrders">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="lead">Order #{{order.id}}</p>
+                        </div>
+                        <div>
+                            <p class="time">{{order.accepted | date : 'dd-MM-yyyy HH:mm'}}</p>
+                        </div>
+                    </div>
+                    <ul>
+                        <li class="list-group-item" ng-repeat="orderItem in order.orderItems">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <p class="lead">{{orderItem.menuItem.name}}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p class="time">{{orderItem.amount}}</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <br/>
+                    <div ng-if="order.waiter != null">
+                        <p class="lead"> Waiter: {{order.waiter.firstName}} {{order.waiter.lastName}}</p>
+                    </div>
+                    <div ng-if="order.readyAtArrival">
+                        <p class="time"> Should be prepared before {{order.reservationStart | date : 'dd-MM-yyyy
+                            HH:mm'}} </p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8"></div>
+                        <div class="col-md-2" ng-if="order.orderStatus == 'PREPARED'">
+                            <i class="inline-right glyphicon glyphicon-ok" ng-click="closeOrder($index)"></i>
+                        </div>
+                        <div class="col-md-2">
+                            <i class="inline-right glyphicon glyphicon-pencil" ng-click="editOrder($index)"></i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-md-2"></div>
+        <div class="container col-md-5">
+            <h2 class="text-center">Pending Orders</h2>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="order in allOrders">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="lead">Order #{{order.id}}</p>
+                        </div>
+                        <div>
+                            <p class="time">{{order.created | date : 'dd-MM-yyyy HH:mm'}}</p>
+                        </div>
+                    </div>
+                    <ul>
+                        <li class="list-group-item" ng-repeat="orderItem in order.orderItems">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <p class="lead">{{orderItem.menuItem.name}}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p class="time">{{orderItem.amount}}</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div ng-if="order.readyAtArrival">
+                        <p class="time"> Should be prepared before {{order.reservationStart | date : 'dd-MM-yyyy
+                            HH:mm'}} </p>
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <div class="col-md-12">
+                            <i class="inline-right glyphicon glyphicon-ok" ng-click="acceptOrder($index)"></i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

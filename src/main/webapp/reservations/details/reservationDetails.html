@@ -1,0 +1,160 @@
+<div class="main-content content-large">
+    <h2 class="form-auth-heading">Reservation</h2>
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>Restaurant</p>
+                            <p>Datetime</p>
+                            <p>Duration (hours)</p>
+                            <p>Tables</p>
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{reservation.restaurant.name || "N/A"}}</p>
+                            <p>{{reservation.date | date : 'dd.MM.yyyy. HH:mm'}}</p>
+                            <p>{{reservation.hoursLength || "N/A"}} </p>
+                            <p>{{tables || "N/A"}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <p>Other guests:</p>
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="reservationGuest in reservation.reservationGuests"
+                            ng-if="reservationGuest.guest.id != USER.id">
+                            {{reservationGuest.guest.firstName}} {{reservationGuest.guest.lastName}}
+                            ({{reservationGuest.accepted ? 'accepted' : 'pending'}})
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn btn-lg btn-danger" ng-if="cancellable()" ng-click="cancelReservation()">
+                    Cancel reservation
+                </button>
+            </div>
+
+            <form name="orderForm">
+                <h4 class="form-auth-heading">Edit order</h4>
+                <div>
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="item in items">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <p class="lead">{{item.menuItem.name}}</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <p class="time">{{item.amount}}</p>
+                                </div>
+                                <div class="col-md-1" ng-if="cancellable()">
+                                    <i class="inline-right glyphicon glyphicon-trash" ng-click="removeItem($index)"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <label>Ready at arrival:
+                        <input ng-disabled="!cancellable()" type="checkbox" ng-model="order.readyAtArrival">
+                    </label>
+                    <button ng-if="cancellable()" class="btn btn-lg btn-primary btn-block" data-toggle="modal"
+                            data-target="#addItemModal">
+                        Add
+                    </button>
+                    <button ng-if="cancellable()" class="btn btn-lg btn-primary btn-block" ng-click="save()">
+                        Save
+                    </button>
+                </div>
+            </form>
+
+        </div>
+        <div ng-if="reservationStarted()">
+            <div class="row">
+                <div class="col-md-3">
+                    <p class="lead"> &nbsp; Restaurant </p>
+                </div>
+                <div class="col-md-3">
+                    <star-rating-comp on-click="onRestaurantRatingChange($event)" disabled="getRestaurantRating() != ''"
+                                      label-position="'right'" show-hover-stars="true" rating="getRestaurantRating()"
+                                      size="'large'" label-text="getRestaurantRating()"
+                                      speed="'immediately'"></star-rating-comp>
+                </div>
+            </div>
+            <div class="row" ng-if="order.orderItems.length != 0 && order.waiter != null">
+                <div class="col-md-3">
+                    <p class="lead"> &nbsp; Waiter </p>
+                </div>
+                <div class="col-md-3">
+                    <star-rating-comp on-click="onWaiterRatingChange($event)" disabled="getWaiterRating() != ''"
+                                      label-position="'right'" show-hover-stars="true" rating="getWaiterRating()"
+                                      size="'large'" label-text="getWaiterRating()"
+                                      speed="'immediately'"></star-rating-comp>
+                </div>
+            </div>
+            <div class="row" ng-if="order.orderItems.length != 0">
+                <div class="col-md-3">
+                    <p class="lead"> &nbsp; Food and Drinks </p>
+                </div>
+                <div class="col-md-3">
+                    <star-rating-comp on-click="onOrderRatingChange($event)" disabled="getOrderRating() != ''"
+                                      label-position="'right'" show-hover-stars="true" rating="getOrderRating()"
+                                      size="'large'" label-text="getOrderRating()"
+                                      speed="'immediately'"></star-rating-comp>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dialog -->
+<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Choose Food/Drink item
+                </h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form name="addItemForm" role="form">
+                    <div class="row form-group">
+                        <div class="col-md-10">
+                            <label for="itemSelect">Item</label>
+                            <select id="itemSelect" ng-options="menuItem.name for menuItem in menu.menuItems"
+                                    class="form-control" style="margin-bottom: 5px;" required
+                                    ng-model="selectedItem">
+                                <option value="" disabled>Choose item...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="amount">Amount</label>
+                            <input id="amount" type="number" min="1" class="form-control" required
+                                   ng-model="amount"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" ng-disabled="addItemForm.$invalid" class="btn btn-primary"
+                        ng-click="addItem()">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

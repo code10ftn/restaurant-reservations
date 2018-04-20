@@ -1,0 +1,17 @@
+<form name="newBidForm" class="main-content content-large">
+    <h2 class="form-auth-heading">Add bid</h2>
+    <label>Price</label>
+    <input type="number" step="any" class="form-control" required ng-model="bid.price">
+
+    <label>Date of delivery</label>
+    <input type="date" class="form-control" required ng-model="bid.dateOfDelivery">
+
+    <label>Warranty</label>
+    <input type="text" ng-disabled="disabled" class="form-control" required
+           ng-model="bid.warranty">
+
+    <button ng-disabled="newBidForm.$invalid" class="btn btn-lg btn-primary btn-block"
+            ng-click="createBid()">
+        Create
+    </button>
+</form>

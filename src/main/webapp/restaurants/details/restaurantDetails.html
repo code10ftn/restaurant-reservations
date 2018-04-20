@@ -1,0 +1,130 @@
+<div class="main-content content-large">
+    <form name="detailsForm">
+        <h2 class="form-auth-heading">Update details</h2>
+
+        <label>Restaurant name</label>
+        <input type="text" class="form-control" ng-change="change()" required ng-model="restaurant.name">
+
+        <label>Restaurant description</label>
+        <input type="text" class="form-control" ng-change="change()" required ng-model="restaurant.description">
+
+        <label>Type</label>
+        <input type="text" class="form-control" ng-change="change()" required ng-model="restaurant.type">
+
+        <label>Address</label>
+        <input type="text" class="form-control" ng-change="change()" required ng-model="restaurant.address">
+
+        <button ng-disabled="notChanged" class="btn btn-lg btn-primary btn-block" ng-click="save()">
+            Save changes
+        </button>
+    </form>
+
+    <div class="row">
+        <div class="container col-md-5">
+            <h2 class="text-center">Food menu</h2>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="food in foodMenu">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <p class="lead">{{food.name}}</p>
+                        </div>
+                        <div class="col-md-5">
+                            <p class="lead">${{food.price}}</p>
+                        </div>
+                        <button class="btn btn-default btn-lg inline-right" ng-click="deleteFood(food)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <p>{{food.description}}</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <button class="btn btn-lg btn-primary btn-block" data-toggle="modal" data-target="#addItemModal"
+                    ng-click="setItemType('FOOD')">
+                Add
+            </button>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="container col-md-5">
+            <h2 class="text-center">Drink menu</h2>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="drink in drinkMenu">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <p class="lead">{{drink.name}}</p>
+                        </div>
+                        <div class="col-xs-5">
+                            <p class="lead">${{drink.price}}</p>
+                        </div>
+                        <button class="btn btn-default btn-lg inline-right" ng-click="deleteDrink(drink)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <p>{{drink.description}}</p>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+            <button class="btn btn-lg btn-primary btn-block" data-toggle="modal" data-target="#modal"
+                    ng-click="setItemType('DRINK')">
+                Add
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Add menu item
+                </h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form name="menuItemForm" role="form">
+                    <div class="form-group">
+                        <label for="foodName">Name</label>
+                        <input id="foodName" type="text" class="form-control" required
+                               ng-model="menuItem.name">
+                    </div>
+                    <div class="form-group">
+                        <label for="foodDesc">Description</label>
+                        <input id="foodDesc" type="text" class="form-control" required
+                               ng-model="menuItem.description">
+                    </div>
+                    <div class="form-group">
+                        <label for="foodPrice">Price</label>
+                        <input id="foodPrice" type="number" step="any" class="form-control" required
+                               ng-model="menuItem.price">
+                    </div>
+                </form>
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                    Close
+                </button>
+                <button ng-disabled="menuItemForm.$invalid" class="btn btn-primary" ng-click="addItem()"
+                        data-dismiss="modal">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

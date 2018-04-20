@@ -1,0 +1,43 @@
+<div class="main-content content-large row">
+    <div class="col-md-6">
+        <form name="detailsForm">
+            <h2 class="form-auth-heading">Update details</h2>
+
+            <label>First name</label>
+            <input type="text" class="form-control" ng-change="change()" required ng-model="user.firstName">
+
+            <label>Last name</label>
+            <input type="text" class="form-control" ng-change="change()" required ng-model="user.lastName">
+
+            <label>Clothing size</label>
+            <input type="text" class="form-control" ng-change="change()" required ng-model="user.clothingSize">
+
+            <label>Shoe size</label>
+            <input type="number" class="form-control" ng-change="change()" required ng-model="user.shoeSize">
+
+            <button ng-disabled="notChanged" class="btn btn-lg btn-primary btn-block" ng-click="save()">
+                Save changes
+            </button>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <form name="passwordForm">
+            <h2 class="form-auth-heading">Change password</h2>
+
+            <label>Old password</label>
+            <input type="password" class="form-control" required ng-model="passwords.oldPassword">
+
+            <label>New password</label>
+            <input type="password" class="form-control" required ng-model="passwords.newPassword">
+
+            <label>Confirm password</label>
+            <input type="password" class="form-control" required ng-model="passwords.confirmPassword">
+
+            <button ng-disabled="passwordForm.$invalid" class="btn btn-lg btn-primary btn-block"
+                    ng-click="updatePassword()">
+                Save changes
+            </button>
+        </form>
+    </div>
+</div>

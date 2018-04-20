@@ -1,0 +1,49 @@
+<form name="signUpForm" class="main-content content-small">
+    <h2 class="form-auth-heading">Add employee</h2>
+
+    <label>First name</label>
+    <input type="text" class="form-control" required autofocus ng-model="employee.firstName">
+
+    <label>Last name</label>
+    <input type="text" class="form-control" required ng-model="employee.lastName">
+
+    <label>Email</label>
+    <input type="email" class="form-control" required ng-model="employee.email">
+
+    <label>Password</label>
+    <input type="password" class="form-control" required ng-model="employee.password">
+
+    <label>Confirm password</label>
+    <input type="password" class="form-control" required ng-model="employee.passwordConfirmation">
+
+    <label>Date of birth</label>
+    <input type="date" class="form-control" equired ng-model="employee.birthDate">
+
+    <label>Clothing size</label>
+    <input type="text" class="form-control" required ng-model="employee.clothingSize">
+
+    <label>Shoe size</label>
+    <input type="number" class="form-control" required ng-model="employee.shoeSize">
+
+    <label>Employee type</label>
+    <select id="typeSelect" class="form-control" style="margin-bottom: 5px;" required ng-model="role">
+        <option selected value="">Select...</option>
+        <option value="CHEF">Chef</option>
+        <option value="WAITER">Waiter</option>
+        <option value="BARTENDER">Bartender</option>
+    </select>
+
+    <div ng-if="role == 'CHEF'" class="control-group">
+        <label class="control-label" for="foodSelect">Chef food specialty</label>
+        <div class="controls">
+            <select id="foodSelect" class="form-control" style="margin-bottom: 5px;" ng-model="employee.foodType">
+                <option selected value="">Select...</option>
+                <option value="SALAD">Salads</option>
+                <option value="FRIED">Fried food</option>
+            </select>
+        </div>
+    </div>
+    <button ng-disabled="signUpForm.$invalid" class="btn btn-lg btn-primary btn-block" ng-click="signup()">
+        Sign up
+    </button>
+</form>

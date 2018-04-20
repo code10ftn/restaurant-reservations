@@ -1,0 +1,30 @@
+<div class="main-content content-medium">
+    <h2 class="form-auth-heading">Bids</h2>
+    <ul class="list-group list-pointer">
+        <li class="list-group-item" ng-repeat="bid in bids" ng-click="openBid(bid)">
+            <div class="row">
+                <div class="col-xs-5">
+                    {{bid.dateOfDelivery | date : "dd-MM-yyyy HH:mm"}}
+                </div>
+                <div class="col-xs-5">
+                    {{bid.price}}
+                </div>
+                <div ng-switch on="bid.status">
+                    <div ng-switch-when="ACCEPTED">
+                        <p class="lead">Accepted</p>
+                    </div>
+                    <div ng-switch-when="DECLINED">
+                        <p class="lead">Declined</p>
+                    </div>
+                    <div ng-switch-when="ACTIVE">
+                        <p class="lead">Active</p>
+                    </div>
+                </div>
+
+            </div>
+            <row>
+                {{bid.warranty}}
+            </row>
+        </li>
+    </ul>
+</div>

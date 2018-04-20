@@ -1,0 +1,52 @@
+<div class="main-content content-large">
+    <div class="col-md-4">
+        <form class="form-horizontal" name="AddTableForm">
+            <h2 class="form-auth-heading">Add table</h2>
+            <div class="control-group">
+                <label class="control-label" for="seatCount">Number of seats</label>
+                <div class="controls">
+                    <input type="number" id="seatCount" class="form-control" required ng-model="newTable.seatCount">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="area">Area</label>
+                <div class="controls">
+                    <select id="area" class="form-control" style="margin-bottom: 5px;" required
+                            ng-model="newTable.area">
+                        <option selected value="">Select...</option>
+                        <option value="INSIDE_NONSMOKING">Inside (nonsmoking)</option>
+                        <option value="INSIDE_SMOKING">Inside (smoking)</option>
+                        <option value="GARDEN_OPEN">Garden (open)</option>
+                        <option value="GARDEN_CLOSED">Garden (closed)</option>
+                    </select>
+                </div>
+            </div>
+            <button ng-disabled="AddTableForm.$invalid" class="btn btn-lg btn-primary btn-block" ng-click="addTable()">
+                Add
+            </button>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <div class="stretchy-wrapper" style="border:1px solid black;">
+            <div id="canvas" class="white-bg">
+                <div id="{{table.id}}" class="restaurant-table draggable" ng-repeat="table in tables"
+                     ng-disabled="table.disabled"
+                     data-x="{{table.x}}"
+                     data-y="{{table.y}}"
+                     ng-style="{
+                     'background-color': table.color,
+                     'transform': 'translate(' + table.x + 'px,' + table.y + 'px)',
+                     'width' : table.w,
+                     'height' : table.h
+                      }">
+                    <p class="text-center">{{table.seatCount}}</p>
+                    <i class="inline-right glyphicon glyphicon-trash" ng-click="removeTable($index)"></i>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <button ng-disabled="notChanged" class="btn btn-lg btn-primary btn-block" ng-click="saveChanges()">
+            Save changes
+        </button>
+    </div>
+</div>

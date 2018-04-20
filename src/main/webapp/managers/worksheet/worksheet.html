@@ -1,0 +1,114 @@
+<div class="main-content content-large">
+    <div class="col-md-4">
+        <form name="worksheetForm">
+            <label>Employee type</label>
+            <select id="typeSelect" class="form-control" style="margin-bottom: 5px;" required ng-model="role"
+                    ng-change="typeSelectChanged()">
+                <option selected value="">All employees</option>
+                <option value="CHEF">Chef</option>
+                <option value="WAITER">Waiter</option>
+                <option value="BARTENDER">Bartender</option>
+            </select>
+            <div ng-if="role == 'WAITER'">
+                <label>Area</label>
+                <select id="area" class="form-control" style="margin-bottom: 5px;" required
+                        ng-model="shiftArea.area">
+                    <option selected value="">Select...</option>
+                    <option value="INSIDE_NONSMOKING">Inside (nonsmoking)</option>
+                    <option value="INSIDE_SMOKING">Inside (smoking)</option>
+                    <option value="GARDEN_OPEN">Garden (open)</option>
+                    <option value="GARDEN_CLOSED">Garden (closed)</option>
+                </select>
+            </div>
+            <label>Employee</label>
+            <select id="repeatSelect" class="form-control" style="margin-bottom: 5px;" required
+                    ng-model="selectedEmployee">
+                <option ng-repeat="employee in employeesSelect" value="{{employee.id}}">{{employee.firstName}}
+                    {{employee.lastName}}
+                </option>
+            </select>
+            <label>Day of week</label>
+            <select id="daySelect" class="form-control" style="margin-bottom: 5px;" required ng-model="day">
+                <option selected value="">Select...</option>
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+                <option value="0">Sunday</option>
+            </select>
+            <label>Shift start</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="number" class="form-control" value="0" min="0" max="23" placeholder="HH" required
+                           ng-model="startHr"/>
+                </div>
+                <div class="col-md-6">
+                    <input type="number" class="form-control" value="0" min="0" max="59" placeholder="mm" required
+                           ng-model="startMin"/>
+                </div>
+            </div>
+            <label>Shift end</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="number" class="form-control" value="0" min="0" max="23" placeholder="HH" required
+                           ng-model="endHr"/>
+                </div>
+                <div class="col-md-6">
+                    <input type="number" class="form-control" value="0" min="0" max="59" placeholder="mm" required
+                           ng-model="endMin"/>
+                </div>
+            </div>
+            <button ng-disabled="worksheetForm.$invalid" class="btn btn-lg btn-primary btn-block" ng-click="addEvent()">
+                Add
+            </button>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>
+        <br/>
+        <button ng-disabled="notChanged" class="btn btn-lg btn-primary btn-block" ng-click="saveChanges()">
+            Save changes
+        </button>
+    </div>
+</div>
+
+<!-- Dialog -->
+<div class="modal fade" id="shiftModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Shift details
+                </h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <div class="form-group">
+                    <h4><b>{{openedShift.title}}</b></h4>
+                    <h6>{{openedShift.role}}</h6>
+                    <br/>
+                    {{openedShift.day}}
+                    {{openedShift.start._d | date : 'HH:mm'}} - {{openedShift.end._d | date : 'HH:mm'}}
+                    <br/>
+                    {{openedShift.area}}
+                </div>
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button class="btn btn-danger" ng-click="deleteShift()"
+                        data-dismiss="modal">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

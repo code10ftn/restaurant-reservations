@@ -1,0 +1,48 @@
+<div class="main-content content-large">
+    <div class="row">
+        <div class="container col-md-5">
+            <h2 class="text-center">My Orders</h2>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="item in myItems">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="lead">{{item.menuItem.name}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="inline-right glyphicon glyphicon-ok" ng-click="setPreparedStatus($index)"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div>
+                            <p class="time">{{item.amount}}</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-md-2"></div>
+        <div class="container col-md-5">
+            <h2 class="text-center">Pending Orders</h2>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="item in items">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="lead">{{item.menuItem.name}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="inline-right glyphicon glyphicon-ok" ng-click="setPreparingStatus($index)"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div>
+                            <p class="time">{{item.amount}}</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurants</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Bootstrap table -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+
+    <!-- Toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css">
+
+    <!-- Calendar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css">
+
+    <!-- Datetime picker -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body data-ng-app="app">
+
+<div ui-view="navbar"></div>
+<div class="container-fluid">
+    <div ng-if="USER != null && USER.role != 'ADMIN' && USER.role != 'MANAGER'">
+        <div ui-view="content" class="col-md-10 vertical-stretch"></div>
+        <div ui-view="notifications" class="col-md-2 vertical-stretch notifications"></div>
+    </div>
+    <div ng-if="USER == null || USER.role == 'ADMIN' || USER.role == 'MANAGER'">
+        <div ui-view="content"></div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- AngularJS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+<!-- AngularUI -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<!-- Botostrap table -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+
+<!-- Toastr -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js"></script>
+<script>
+    toastr.options.preventDuplicates = true;
+    toastr.options.timeOut = "2500";
+    toastr.options.positionClass = "toast-top-right";
+</script>
+
+<!-- Calendar -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-calendar/1.0.0/calendar.min.js"></script>
+
+<!-- Datetime picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+<!-- WebSockets -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/sockjs/1.0.3/sockjs.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script type="text/javascript" src="libs/angular-stomp.js"></script>
+
+<!-- Interact JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.2.8/interact.min.js"></script>
+
+<!-- Chart -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/1.1.1/angular-chart.min.js"></script>
+
+<!-- Google Maps API -->
+<!-- Hidden in public repository. -->
+
+<!-- Star Rating -->
+<script src="https://cdn.rawgit.com/BioPhoton/angular1-star-rating/v1.2.4/dist/index.js"></script>
+
+<!-- My app -->
+<script src="app.js"></script>
+
+<script src="directives/datetimeDirective.js"></script>
+
+<script src="dialogs/editOfferDialogController.js"></script>
+
+<script src="admins/list/adminListController.js"></script>
+<script src="admins/signup/adminSignupController.js"></script>
+<script src="admins/adminService.js"></script>
+<script src="admins/adminStates.js"></script>
+
+<script src="auth/signin/signinController.js"></script>
+<script src="auth/signout/signoutController.js"></script>
+<script src="auth/signup/signupController.js"></script>
+<script src="auth/authService.js"></script>
+<script src="auth/authStates.js"></script>
+
+<script src="employees/details/employeeDetailsController.js"></script>
+<script src="employees/list/employeeListController.js"></script>
+<script src="employees/signup/employeeSignupController.js"></script>
+<script src="employees/worksheet/employeeWorksheetController.js"></script>
+<script src="employees/employeeService.js"></script>
+<script src="employees/employeeStates.js"></script>
+
+<script src="friends/list/friendListController.js"></script>
+<script src="friends/friendService.js"></script>
+<script src="friends/friendStates.js"></script>
+
+<script src="guests/details/guestDetailsController.js"></script>
+<script src="guests/guestService.js"></script>
+<script src="guests/guestStates.js"></script>
+
+<script src="managers/list/managerListController.js"></script>
+<script src="managers/signup/managerSignupController.js"></script>
+<script src="managers/worksheet/worksheetController.js"></script>
+<script src="managers/managerService.js"></script>
+<script src="managers/managerStates.js"></script>
+
+<script src="navbar/navbarController.js"></script>
+
+<script src="notifications/notificationsController.js"></script>
+<script src="notifications/notificationService.js"></script>
+
+<script src="orders/bartender/bartenderOrdersController.js"></script>
+<script src="orders/chef/chefOrdersController.js"></script>
+<script src="orders/waiter/editOrder/editOrderController.js"></script>
+<script src="orders/waiter/newOrder/newOrderController.js"></script>
+<script src="orders/waiter/ordersController.js"></script>
+<script src="orders/orderService.js"></script>
+<script src="orders/orderStates.js"></script>
+
+<script src="reservations/details/reservationDetailsController.js"></script>
+<script src="reservations/list/reservationListController.js"></script>
+<script src="reservations/new/newReservationController.js"></script>
+<script src="reservations/reservationService.js"></script>
+<script src="reservations/reservationStates.js"></script>
+
+<script src="restaurants/browse/BrowseRestaurantsController.js"></script>
+<script src="restaurants/details/restaurantDetailsController.js"></script>
+<script src="restaurants/list/restaurantListController.js"></script>
+<script src="restaurants/new/newRestaurantController.js"></script>
+<script src="restaurants/visited/VisitedRestaurantsController.js"></script>
+<script src="restaurants/restaurantService.js"></script>
+<script src="restaurants/restaurantStates.js"></script>
+<script src="restaurants/menuService.js"></script>
+<script src="restaurants/seating/restaurantSeatingController.js"></script>
+
+<script src="shifts/shiftService.js"></script>
+
+<script src="suppliers/signup/supplierSignupController.js"></script>
+<script src="suppliers/supplierService.js"></script>
+<script src="suppliers/supplierStates.js"></script>
+<script src="suppliers/details/supplierDetailsController.js"></script>
+<script src="suppliers/list/supplierListController.js"></script>
+
+<script src="tables/tableService.js"></script>
+
+<script src="users/changePassword/changePasswordController.js"></script>
+<script src="users/userService.js"></script>
+<script src="users/userStates.js"></script>
+
+<script src="offers/list/offerListController.js"></script>
+<script src="offers/new/newOfferController.js"></script>
+<script src="offers/offerService.js"></script>
+<script src="offers/offerStates.js"></script>
+<script src="offers/details/offerDetailsController.js"></script>
+<script src="offers/edit/editOfferController.js"></script>
+
+<script src="bids/new/newBidController.js"></script>
+<script src="bids/bidService.js"></script>
+<script src="bids/bidStates.js"></script>
+<script src="bids/list/bidListController.js"></script>
+<script src="bids/edit/editBidController.js"></script>
+<script src="bids/mylist/myBidListController.js"></script>
+
+<script src="reports/reportService.js"></script>
+<script src="reports/reportStates.js"></script>
+<script src="reports/revenue/revenueController.js"></script>
+<script src="reports/visits/visitsController.js"></script>
+<script src="reports/ratings/ratingsController.js"></script>
+
+</body>
+</html>

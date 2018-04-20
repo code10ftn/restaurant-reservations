@@ -1,0 +1,33 @@
+<div class="main-content content-large">
+    <div class="row">
+        <form name="dateForm">
+            <h2 class="form-auth-heading">Restaurant visits</h2>
+            <div class="row">
+                <div class="col-md-10">
+                    <label>Date</label>
+                    <input type="date" class="form-control" required ng-model="date">
+                    <button ng-disabled="dateForm.$invalid" class="btn btn-lg btn-primary btn-block"
+                            ng-click="showGraph()">
+                        Show graph
+                    </button>
+                </div>
+                <div class="col-md-2">
+                    <label>
+                        <input type="radio" ng-model="type" value="DAILY">
+                        Daily
+                    </label><br/>
+                    <label>
+                        <input type="radio" ng-model="type" value="WEEKLY">
+                        Weekly
+                    </label><br/>
+                </div>
+            </div>
+        </form>
+        <div class="well">
+            <canvas id="bar" class="chart chart-bar"
+                    chart-data="data" chart-labels="labels"> chart-series="series"
+            </canvas>
+        </div>
+
+    </div>
+</div>

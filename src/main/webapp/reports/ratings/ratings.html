@@ -1,0 +1,84 @@
+<div class="main-content content-large">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead"> &nbsp; Restaurant rating: </p>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <star-rating-comp read-only="true" show-half-stars="true"
+                                  label-position="'right'" show-hover-stars="true"
+                                  rating="restaurantRating.rating"
+                                  size="'large'"
+                                  label-text='restaurantRating.rating + " (" + restaurantRating.count + ")"'
+                                  speed="'immediately'">
+
+                </star-rating-comp>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <h2 class="form-auth-heading">Search waiter</h2>
+        <div class="row">
+
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Search..." autofocus
+                       ng-model="searchTextWaiter">
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <p class="lead"> &nbsp; Waiter rating: </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <star-rating-comp read-only="true" show-half-stars="true"
+                                          label-position="'right'" show-hover-stars="true"
+                                          rating="waiterRating.rating "
+                                          size="'large'"
+                                          label-text='waiterRating.rating + " (" + waiterRating.count + ")"'
+                                          speed="'immediately'">
+
+                        </star-rating-comp>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table ng-show="searchTextWaiter.length > 0" id="searchTextResults1">
+            <tr ng-repeat="waiter in waiters | filter: searchTextWaiter | orderBy:['firstName', 'lastName']">
+                <td ng-click="getWaiterRating(waiter)"><b>{{waiter.firstName}} {{waiter.lastName}}</b></td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <h2 class="form-auth-heading">Search menu item</h2>
+        <div class="row">
+
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Search..." autofocus
+                       ng-model="searchTextItem">
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <p class="lead"> &nbsp; Menu item rating: </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <star-rating-comp read-only="true" show-half-stars="true"
+                                          label-position="'right'" show-hover-stars="true"
+                                          rating="itemRating.rating"
+                                          size="'large'"
+                                          label-text='itemRating.rating + " (" + itemRating.count + ")"'
+                                          speed="'immediately'">
+
+                        </star-rating-comp>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table ng-show="searchTextItem.length > 0" id="searchTextResults2">
+            <tr ng-repeat="item in items | filter: searchTextItem | orderBy:['name']">
+                <td ng-click="getItemRating(item)"><b>{{item.name}}</b></td>
+            </tr>
+        </table>
+    </div>
+</div>

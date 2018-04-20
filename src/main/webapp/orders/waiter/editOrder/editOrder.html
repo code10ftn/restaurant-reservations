@@ -1,0 +1,81 @@
+<div class="main-content content-small">
+    <form name="orderForm">
+        <h2 class="form-auth-heading">Edit order</h2>
+
+        <div>
+            <label>Food and Drinks</label>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="item in items">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <p class="lead">{{item.menuItem.name}}</p>
+                        </div>
+                        <div class="col-md-2">
+                            <p class="time">{{item.amount}}</p>
+                        </div>
+                        <div class="col-md-1" ng-if="item.status == 'CREATED'">
+                            <i class="inline-right glyphicon glyphicon-trash" ng-click="removeItem($index)"></i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <button class="btn btn-lg btn-primary btn-block" data-toggle="modal" data-target="#addItemModal">
+                Add
+            </button>
+            <button ng-disabled="orderFormInvalid()" class="btn btn-lg btn-primary btn-block" ng-click="save()">
+                Save
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Dialog -->
+<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Choose Food/Drink item
+                </h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form name="addItemForm" role="form">
+                    <div class="row form-group">
+                        <div class="col-md-10">
+                            <label for="itemSelect">Item</label>
+                            <select id="itemSelect" ng-options="menuItem.name for menuItem in menu.menuItems"
+                                    class="form-control" style="margin-bottom: 5px;" required
+                                    ng-model="selectedItem">
+                                <option value="" disabled>Choose item...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="amount">Amount</label>
+                            <input id="amount" type="number" min="1" class="form-control" required
+                                   ng-model="amount"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" ng-disabled="addItemForm.$invalid" class="btn btn-primary"
+                        ng-click="addItem()">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

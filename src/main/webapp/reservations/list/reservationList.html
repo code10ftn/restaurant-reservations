@@ -1,0 +1,10 @@
+<div class="main-content content-medium">
+    <h2 class="form-auth-heading">Reservations</h2>
+
+    <ul class="list-group">
+        <li class="list-group-item list-pointer" ng-repeat="reservation in reservations | orderBy:'date'"
+            ng-click="openReservation(reservation)">
+            {{reservation.restaurant.name}} - {{reservation.date | date: 'dd.MM.yyyy. HH:mm'}}
+        </li>
+    </ul>
+</div>

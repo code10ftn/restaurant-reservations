@@ -1,0 +1,91 @@
+<div class="main-content content-large">
+    <div class="row">
+        <form name="newOfferForm" class="col-xs-6">
+            <h2 class="form-auth-heading">Edit offer</h2>
+            <label>Start date</label>
+            <input type="datetime-local" class="form-control" ng-change="change()" required ng-model="offer.startDate">
+
+            <label>End date</label>
+            <input type="datetime-local" class="form-control" ng-change="change()" required ng-model="offer.endDate">
+
+
+            <button ng-disabled="notChanged" class="btn btn-lg btn-primary btn-block"
+                    ng-click="save()">
+                Save changes
+            </button>
+            <button class="btn btn-lg btn-primary btn-block"
+                    ng-click="bids()">
+                Show bids
+            </button>
+        </form>
+        <div class="col-xs-6">
+            <h2 class="text-center">Offer items</h2>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="item in offer.offerItems">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            {{item.name}}
+                        </div>
+                        <div class="col-xs-4">
+                            {{item.amount}}
+                        </div>
+                        <button class="btn btn-default btn-lg inline-right" ng-click="editItem(item)">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button class="btn btn-default btn-lg inline-right" ng-click="deleteItem(item)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+            <button class="btn btn-lg btn-primary btn-block" data-toggle="modal" data-target="#modal">
+                Add
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Add offer item
+                </h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form name="menuItemForm" role="form">
+                    <div class="form-group">
+                        <label for="itemName">Name</label>
+                        <input id="itemName" type="text" class="form-control" required
+                               ng-model="offerItem.name">
+                    </div>
+                    <div class="form-group">
+                        <label for="itemAmount">Amount</label>
+                        <input id="itemAmount" type="number" step="any" class="form-control" required
+                               ng-model="offerItem.amount">
+                    </div>
+                </form>
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                    Close
+                </button>
+                <button ng-disabled="menuItemForm.$invalid" class="btn btn-primary" ng-click="addItem()"
+                        data-dismiss="modal">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
